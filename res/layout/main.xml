@@ -2,7 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
+	<TextView  
+		android:id="@+id/positionTextView"
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" 
+	    />
 	<com.google.android.maps.MapView 
+		android:id="@+id/map"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" 
 		android:text="@string/hello"

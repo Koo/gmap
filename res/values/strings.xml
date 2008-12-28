@@ -2,4 +2,10 @@
 <resources>
     <string name="hello">Hello World, GMapExampleActivity</string>
     <string name="app_name">Google Map Example</string>
+    <string name="show_point">Show position</string>
+    <string name="zoom_up">Zoom in</string>
+    <string name="zoom_down">Zoom out</string>
+    <string name="goto_fujisan">Go to Fujisan</string>
+    <string name="display_fujisan">Display Fujisan</string>
+    <string name="hide_fujisan">Hide Fujisan</string>
 </resources>
