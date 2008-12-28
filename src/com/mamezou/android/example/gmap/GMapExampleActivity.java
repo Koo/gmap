@@ -1,5 +1,8 @@
 package com.mamezou.android.example.gmap;
 
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.ArcShape;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +12,7 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayItem;
 
 public class GMapExampleActivity extends MapActivity {
 	private static final int VIEW_GROUP_ID = 1;
@@ -19,10 +23,13 @@ public class GMapExampleActivity extends MapActivity {
 	private static final int GOTO_FUJISAN_ID = 4;
 	private static final int DISPLAY_FUJISAN_OVERLAY = 5;
 	private static final int HIDE_FUJISAN_OVERLAY = 6;
+	private static final int ADD_POINT_ID = 7;
+	private static final int CLEAR_POINT_ID = 8;
 
 	private MapView mapView;
 	private Overlay fujisanOverlay;
 	private TextView positionTextView;
+	private CheckPointOverlay checkPointOverlay;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -34,6 +41,14 @@ public class GMapExampleActivity extends MapActivity {
 		positionTextView = (TextView) findViewById(R.id.positionTextView);
 
 		fujisanOverlay = new FujisanOverlay();
+		
+//		Drawable marker = getResources().getDrawable(R.drawable.icon);
+		Drawable marker = new ShapeDrawable(new ArcShape(0.0f, 360.0f));
+		marker.setBounds(0, 0, 10, 10);  
+//		marker.setBounds(0, 0, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());  
+		checkPointOverlay = new CheckPointOverlay(marker);
+		mapView.getOverlays().add(checkPointOverlay);
+		mapView.invalidate();
 	}
 
 	@Override
@@ -46,6 +61,8 @@ public class GMapExampleActivity extends MapActivity {
 		menu.add(VIEW_GROUP_ID, DISPLAY_FUJISAN_OVERLAY, 4,
 				R.string.display_fujisan);
 		menu.add(VIEW_GROUP_ID, HIDE_FUJISAN_OVERLAY, 5, R.string.hide_fujisan);
+		menu.add(VIEW_GROUP_ID, ADD_POINT_ID, 6, R.string.add_point);
+		menu.add(VIEW_GROUP_ID, CLEAR_POINT_ID, 7, R.string.clear_point);
 		return true;
 	}
 
@@ -71,6 +88,12 @@ public class GMapExampleActivity extends MapActivity {
 		case HIDE_FUJISAN_OVERLAY:
 			hideFujisanLabel();
 			break;
+		case ADD_POINT_ID:
+			addPoint();
+			break;
+		case CLEAR_POINT_ID:
+			clearPoint();
+			break;
 		}
 		return true;
 	}
@@ -84,6 +107,19 @@ public class GMapExampleActivity extends MapActivity {
 	private void hideFujisanLabel() {
 		// TODO OverlayItemの使用
 		mapView.getOverlays().remove(fujisanOverlay);
+		mapView.invalidate();
+	}
+
+	private void addPoint() {
+		GeoPoint point = mapView.getMapCenter();
+		int no = checkPointOverlay.size();
+		OverlayItem item = new OverlayItem(point, "no is " + no, "no = " + no);
+		checkPointOverlay.addPoint(item);
+		mapView.invalidate();
+	}
+
+	private void clearPoint() {
+		checkPointOverlay.clear();
 		mapView.invalidate();
 	}
 

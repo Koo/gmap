@@ -8,4 +8,6 @@
     <string name="goto_fujisan">Go to Fujisan</string>
     <string name="display_fujisan">Display Fujisan</string>
     <string name="hide_fujisan">Hide Fujisan</string>
+    <string name="add_point">Add Point</string>
+    <string name="clear_point">Clear Point</string>
 </resources>
