@@ -21,7 +21,6 @@ public class GMapExampleActivity extends MapActivity {
 	private static final int HIDE_FUJISAN_OVERLAY = 6;
 
 	private MapView mapView;
-	// private OverlayController overlayController;
 	private Overlay fujisanOverlay;
 	private TextView positionTextView;
 
@@ -33,6 +32,8 @@ public class GMapExampleActivity extends MapActivity {
 
 		mapView = (MapView) findViewById(R.id.map);
 		positionTextView = (TextView) findViewById(R.id.positionTextView);
+
+		fujisanOverlay = new FujisanOverlay();
 	}
 
 	@Override
@@ -75,14 +76,14 @@ public class GMapExampleActivity extends MapActivity {
 	}
 
 	private void displayFujisanLabel() {
-		// TODO 実装
-//		overlayController.add(fujisanOverlay, true);
+		// TODO OverlayItemの使用
+		mapView.getOverlays().add(fujisanOverlay);
 		mapView.invalidate();
 	}
 
 	private void hideFujisanLabel() {
-		// TODO 実装
-//		overlayController.clear();
+		// TODO OverlayItemの使用
+		mapView.getOverlays().remove(fujisanOverlay);
 		mapView.invalidate();
 	}
 
@@ -120,56 +121,6 @@ public class GMapExampleActivity extends MapActivity {
 		sb.append(((double) p.getLongitudeE6()) / 1E6);
 		positionTextView.setText(sb.toString());
 	}
-
-//	private class FujisanOverlay extends Overlay {
-//
-//		@Override
-//		public void draw(Canvas canvas, PixelCalculator calculator,
-//				boolean shadow) {
-//
-//			if (shadow) {
-//				// 富士山の山頂の位置
-//				Point p = new Point(35360833, 138727500);
-//
-//				// 緯度、経度から、画面上の位置を取得する
-//				int[] pos = new int[2];
-//				calculator.getPointXY(p, pos);
-//				// 影の分描画位置をずらす
-//				pos[0] += 2;
-//				pos[1] += 2;
-//
-//				Paint paint;
-//				paint = new Paint();
-//				paint.setAntiAlias(true);
-//				paint.setARGB(255, 0, 0, 0);
-//
-//				// 影の描画
-//				// 取得した画面上の位置に、描画を行う
-//				Rect rect = new Rect(pos[0] - 5, pos[1] - 5, pos[0] + 5,
-//						pos[1] + 5);
-//				canvas.drawRect(rect, paint);
-//				canvas.drawText("富士山です", pos[0] + 3, pos[1], paint);
-//			} else {
-//				// 富士山の山頂の位置
-//				Point p = new Point(35360833, 138727500);
-//
-//				// 緯度、経度から、画面上の位置を取得する
-//				int[] pos = new int[2];
-//				calculator.getPointXY(p, pos);
-//
-//				Paint paint;
-//				paint = new Paint();
-//				paint.setAntiAlias(true);
-//				paint.setARGB(255, 0, 255, 0);
-//				// 本体の描画
-//				// 取得した画面上の位置に、描画を行う
-//				Rect rect = new Rect(pos[0] - 5, pos[1] - 5, pos[0] + 5,
-//						pos[1] + 5);
-//				canvas.drawRect(rect, paint);
-//				canvas.drawText("富士山です", pos[0] + 3, pos[1], paint);
-//			}
-//		}
-//	}
 
 	@Override
 	protected boolean isRouteDisplayed() {
