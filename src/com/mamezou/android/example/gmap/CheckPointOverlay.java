@@ -13,9 +13,9 @@ public class CheckPointOverlay extends ItemizedOverlay<OverlayItem>{
 	private List<OverlayItem> items = new ArrayList<OverlayItem>();
 
 	public CheckPointOverlay(Drawable d) {
-		// デフォルトは丸印
-//		super(new ShapeDrawable(new ArcShape(2.0f, 2.0f)));
 		super(d);
+		// 初期追加時にエラーが発生しないように、populateを実行
+		populate();
 	}
 
 	@Override

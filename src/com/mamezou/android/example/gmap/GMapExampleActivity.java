@@ -1,5 +1,7 @@
 package com.mamezou.android.example.gmap;
 
+import java.util.List;
+
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.ArcShape;
@@ -99,15 +101,19 @@ public class GMapExampleActivity extends MapActivity {
 	}
 
 	private void displayFujisanLabel() {
-		// TODO OverlayItemの使用
-		mapView.getOverlays().add(fujisanOverlay);
-		mapView.invalidate();
+		List<Overlay> overlays = mapView.getOverlays();
+		if (!overlays.contains(fujisanOverlay)) {
+			overlays.add(fujisanOverlay);
+			mapView.invalidate();
+		}
 	}
 
 	private void hideFujisanLabel() {
-		// TODO OverlayItemの使用
-		mapView.getOverlays().remove(fujisanOverlay);
-		mapView.invalidate();
+		List<Overlay> overlays = mapView.getOverlays();
+		if (overlays.contains(fujisanOverlay)) {
+			mapView.getOverlays().remove(fujisanOverlay);
+			mapView.invalidate();
+		}
 	}
 
 	private void addPoint() {
