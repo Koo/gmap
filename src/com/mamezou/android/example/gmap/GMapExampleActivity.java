@@ -43,13 +43,14 @@ public class GMapExampleActivity extends MapActivity {
 		positionTextView = (TextView) findViewById(R.id.positionTextView);
 
 		fujisanOverlay = new FujisanOverlay();
-		
+
 //		Drawable marker = getResources().getDrawable(R.drawable.icon);
+//		marker.setBounds(0, 0, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());  
 		Drawable marker = new ShapeDrawable(new ArcShape(0.0f, 360.0f));
 		marker.setBounds(0, 0, 10, 10);  
-//		marker.setBounds(0, 0, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());  
 		checkPointOverlay = new CheckPointOverlay(marker);
 		mapView.getOverlays().add(checkPointOverlay);
+
 		mapView.invalidate();
 	}
 
@@ -119,7 +120,7 @@ public class GMapExampleActivity extends MapActivity {
 	private void addPoint() {
 		GeoPoint point = mapView.getMapCenter();
 		int no = checkPointOverlay.size();
-		OverlayItem item = new OverlayItem(point, "no is " + no, "no = " + no);
+		OverlayItem item = new OverlayItem(point, "title" + no, "snipet" + no);
 		checkPointOverlay.addPoint(item);
 		mapView.invalidate();
 	}
