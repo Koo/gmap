@@ -27,6 +27,7 @@ public class GMapExampleActivity extends MapActivity {
 	private static final int HIDE_FUJISAN_OVERLAY = 6;
 	private static final int ADD_POINT_ID = 7;
 	private static final int CLEAR_POINT_ID = 8;
+	private static final int FLIP_SATELITE_ID = 9;
 
 	private MapView mapView;
 	private Overlay fujisanOverlay;
@@ -66,6 +67,7 @@ public class GMapExampleActivity extends MapActivity {
 		menu.add(VIEW_GROUP_ID, HIDE_FUJISAN_OVERLAY, 5, R.string.hide_fujisan);
 		menu.add(VIEW_GROUP_ID, ADD_POINT_ID, 6, R.string.add_point);
 		menu.add(VIEW_GROUP_ID, CLEAR_POINT_ID, 7, R.string.clear_point);
+		menu.add(VIEW_GROUP_ID, FLIP_SATELITE_ID, 8, R.string.flip_satellite);
 		return true;
 	}
 
@@ -96,6 +98,9 @@ public class GMapExampleActivity extends MapActivity {
 			break;
 		case CLEAR_POINT_ID:
 			clearPoint();
+			break;
+		case FLIP_SATELITE_ID:
+			flipSatellite();
 			break;
 		}
 		return true;
@@ -165,6 +170,10 @@ public class GMapExampleActivity extends MapActivity {
 		positionTextView.setText(sb.toString());
 	}
 
+	private void flipSatellite() {
+		boolean nowSatellite = mapView.isSatellite();
+		mapView.setSatellite(!nowSatellite);
+	}
 	@Override
 	protected boolean isRouteDisplayed() {
 		return true;

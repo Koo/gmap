@@ -10,4 +10,5 @@
     <string name="hide_fujisan">Hide Fujisan</string>
     <string name="add_point">Add Point</string>
     <string name="clear_point">Clear Point</string>
+    <string name="flip_satellite">Flip Satellite</string>
 </resources>
