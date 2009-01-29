@@ -8,6 +8,7 @@ import android.graphics.drawable.shapes.ArcShape;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
@@ -51,6 +52,9 @@ public class GMapExampleActivity extends MapActivity {
 		marker.setBounds(0, 0, 10, 10);  
 		checkPointOverlay = new CheckPointOverlay(marker);
 		mapView.getOverlays().add(checkPointOverlay);
+		ViewGroup zoom = (ViewGroup) findViewById(R.id.zoom);
+		zoom.addView(mapView.getZoomControls());
+		mapView.displayZoomControls(true);
 
 		mapView.invalidate();
 	}
@@ -142,21 +146,16 @@ public class GMapExampleActivity extends MapActivity {
 		double longitude = 138.0d + 43.0d / 60 + 39.0d / 3600;
 		int latitudeE6 = (int) (latitude * 1E6);
 		int longitudeE6 = (int) (longitude * 1E6);
-		mapView.getController().animateTo(new GeoPoint(latitudeE6, longitudeE6));
+		GeoPoint pos = new GeoPoint(latitudeE6, longitudeE6);
+		mapView.getController().animateTo(pos);
 	}
 
-	private static final int ZOOM_STEP = 1;
-
 	private void zoomIn() {
-		int currentZoomLevel = mapView.getZoomLevel();
-		mapView.getController().setZoom(currentZoomLevel + ZOOM_STEP);
-//		mapView.getController().zoomIn();
+		mapView.getController().zoomIn();
 	}
 
 	private void zoomOut() {
-		int currentZoomLevel = mapView.getZoomLevel();
-		mapView.getController().setZoom(currentZoomLevel - ZOOM_STEP);
-//		mapView.getController().zoomOut();
+		mapView.getController().zoomOut();
 	}
 
 	private void showPoint() {
