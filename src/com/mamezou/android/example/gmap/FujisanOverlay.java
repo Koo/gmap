@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.util.Log;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
@@ -52,5 +53,11 @@ public class FujisanOverlay extends Overlay {
 			canvas.drawText("富士山です", pos.x + 3, pos.y, paint);
 		}
 		super.draw(canvas, mapView, shadow);
+	}
+
+	@Override
+	public boolean onTap(GeoPoint p, MapView mapView) {
+		Log.d("FujisanOverlay", "point = " + p);
+		return true;
 	}
 }
