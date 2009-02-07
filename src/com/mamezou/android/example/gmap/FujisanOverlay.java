@@ -58,6 +58,7 @@ public class FujisanOverlay extends Overlay {
 	@Override
 	public boolean onTap(GeoPoint p, MapView mapView) {
 		Log.d("FujisanOverlay", "point = " + p);
+		// onTapイベントを処理したので、trueを返す
 		return true;
 	}
 }

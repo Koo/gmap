@@ -3,8 +3,6 @@ package com.mamezou.android.example.gmap;
 import java.util.List;
 
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.ArcShape;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,8 +25,9 @@ public class GMapExampleActivity extends MapActivity {
 	private static final int DISPLAY_FUJISAN_OVERLAY = 5;
 	private static final int HIDE_FUJISAN_OVERLAY = 6;
 	private static final int ADD_POINT_ID = 7;
-	private static final int CLEAR_POINT_ID = 8;
-	private static final int FLIP_SATELITE_ID = 9;
+	private static final int ADD_STAR_POINT_ID = 8;
+	private static final int CLEAR_POINT_ID = 9;
+	private static final int FLIP_SATELITE_ID = 10;
 
 	private MapView mapView;
 	private Overlay fujisanOverlay;
@@ -46,12 +45,12 @@ public class GMapExampleActivity extends MapActivity {
 
 		fujisanOverlay = new FujisanOverlay();
 
-//		Drawable marker = getResources().getDrawable(R.drawable.icon);
-//		marker.setBounds(0, 0, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());  
-		Drawable marker = new ShapeDrawable(new ArcShape(0.0f, 360.0f));
-		marker.setBounds(0, 0, 10, 10);  
+		// ItemizedOverlayのセットアップ
+		Drawable marker = getResources().getDrawable(R.drawable.attention);
+		marker.setBounds(0, 0, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());  
 		checkPointOverlay = new CheckPointOverlay(marker);
 		mapView.getOverlays().add(checkPointOverlay);
+
 		ViewGroup zoom = (ViewGroup) findViewById(R.id.zoom);
 		zoom.addView(mapView.getZoomControls());
 		mapView.displayZoomControls(true);
@@ -70,8 +69,9 @@ public class GMapExampleActivity extends MapActivity {
 				R.string.display_fujisan);
 		menu.add(VIEW_GROUP_ID, HIDE_FUJISAN_OVERLAY, 5, R.string.hide_fujisan);
 		menu.add(VIEW_GROUP_ID, ADD_POINT_ID, 6, R.string.add_point);
-		menu.add(VIEW_GROUP_ID, CLEAR_POINT_ID, 7, R.string.clear_point);
-		menu.add(VIEW_GROUP_ID, FLIP_SATELITE_ID, 8, R.string.flip_satellite);
+		menu.add(VIEW_GROUP_ID, ADD_STAR_POINT_ID, 7, R.string.add_star_point);
+		menu.add(VIEW_GROUP_ID, CLEAR_POINT_ID, 8, R.string.clear_point);
+		menu.add(VIEW_GROUP_ID, FLIP_SATELITE_ID, 9, R.string.flip_satellite);
 		return true;
 	}
 
@@ -98,7 +98,10 @@ public class GMapExampleActivity extends MapActivity {
 			hideFujisanLabel();
 			break;
 		case ADD_POINT_ID:
-			addPoint();
+			addPointDefault();
+			break;
+		case ADD_STAR_POINT_ID:
+			addPointStar();
 			break;
 		case CLEAR_POINT_ID:
 			clearPoint();
@@ -126,7 +129,7 @@ public class GMapExampleActivity extends MapActivity {
 		}
 	}
 
-	private void addPoint() {
+	private void addPointDefault() {
 		GeoPoint point = mapView.getMapCenter();
 		int no = checkPointOverlay.size();
 		OverlayItem item = new OverlayItem(point, "title" + no, "snipet" + no);
@@ -134,6 +137,19 @@ public class GMapExampleActivity extends MapActivity {
 		mapView.invalidate();
 	}
 
+	private void addPointStar() {
+		GeoPoint point = mapView.getMapCenter();
+		int no = checkPointOverlay.size();
+		OverlayItem item = new OverlayItem(point, "title" + no, "snipet" + no);
+		
+		// 3回に1回は星でマーク
+		Drawable marker = getResources().getDrawable(R.drawable.star);
+		marker.setBounds(0, 0, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());  
+		item.setMarker(marker);
+
+		checkPointOverlay.addPoint(item);
+		mapView.invalidate();
+	}
 	private void clearPoint() {
 		checkPointOverlay.clear();
 		mapView.invalidate();
