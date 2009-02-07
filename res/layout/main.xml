@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
+android:layout_width="fill_parent" 
+android:layout_height="fill_parent" android:orientation="vertical">
 	<TextView  
 		android:id="@+id/positionTextView"
-	    android:layout_width="fill_parent" 
-	    android:layout_height="wrap_content" 
+	    android:layout_width="wrap_content" 
+	    android:layout_height="wrap_content"
+	    android:enabled="true"
+android:visibility="visible"
 	    />
-	<LinearLayout android:id="@+id/zoom"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-	/>
-	<com.google.android.maps.MapView 
-		android:id="@+id/map"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" 
-		android:text="@string/hello"
-		android:enabled="true"
-		android:clickable="true"
-		android:apiKey="0DclZOOK3MUwPWHzrcpVl_JesnkRADaTdYFbHMQ" />
+	<RelativeLayout 
+	  android:layout_width="fill_parent" 
+	  android:layout_height="fill_parent">
+		<com.google.android.maps.MapView 
+			android:id="@+id/map" 
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent" 
+			android:clickable="true" 
+			android:apiKey="0DclZOOK3MUwPWHzrcpVl_JesnkRADaTdYFbHMQ" />
+		<LinearLayout android:id="@+id/zoom" 
+			android:layout_height="wrap_content" 
+			android:layout_width="fill_parent"
+			android:layout_alignParentBottom="true"
+			android:layout_centerVertical="true"/>
+	</RelativeLayout>
 </LinearLayout>
