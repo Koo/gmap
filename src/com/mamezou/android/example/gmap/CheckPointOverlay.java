@@ -54,7 +54,7 @@ public class CheckPointOverlay extends ItemizedOverlay<OverlayItem>{
 
 	@Override
 	public void draw(Canvas canvas, MapView mapView, boolean shadow) {
-		// CheckPointOverlayのマーカー描画
+		// CheckPointOverlayのマーカ描画
 		super.draw(canvas, mapView, shadow);
 
 		// タップされた点だけテキストを描画
