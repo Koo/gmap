@@ -142,7 +142,7 @@ public class GMapExampleActivity extends MapActivity {
 		int no = checkPointOverlay.size();
 		OverlayItem item = new OverlayItem(point, "title" + no, "snipet" + no);
 		
-		// 3回に1回は星でマーク
+		// 星マークを設定
 		Drawable marker = getResources().getDrawable(R.drawable.star);
 		marker.setBounds(0, 0, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());  
 		item.setMarker(marker);
