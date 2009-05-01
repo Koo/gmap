@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.maps.GeoPoint;
@@ -52,10 +51,8 @@ public class GMapExampleActivity extends MapActivity {
 		marker.setBounds(0, 0, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());  
 		checkPointOverlay = new CheckPointOverlay(marker);
 		mapView.getOverlays().add(checkPointOverlay);
-
-		ViewGroup zoom = (ViewGroup) findViewById(R.id.zoom);
-		zoom.addView(mapView.getZoomControls());
-		mapView.displayZoomControls(true);
+		
+		mapView.setBuiltInZoomControls(true);
 
 		mapView.invalidate();
 	}

@@ -12,6 +12,6 @@
     <string name="add_star_point">Add Star Point</string>
     <string name="clear_point">Clear Point</string>
     <string name="flip_satellite">Flip Satellite</string>
-<string name="flip_street">Flip Street</string>
-<string name="flip_traffic">Flip Traffic</string>
+	<string name="flip_street">Flip Street</string>
+	<string name="flip_traffic">Flip Traffic</string>
 </resources>
