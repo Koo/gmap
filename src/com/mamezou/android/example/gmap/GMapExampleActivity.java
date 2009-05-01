@@ -28,6 +28,8 @@ public class GMapExampleActivity extends MapActivity {
 	private static final int ADD_STAR_POINT_ID = 8;
 	private static final int CLEAR_POINT_ID = 9;
 	private static final int FLIP_SATELITE_ID = 10;
+	private static final int FLIP_STREET_ID = 11;
+	private static final int FLIP_TRAFFIC_ID = 12;
 
 	private MapView mapView;
 	private Overlay fujisanOverlay;
@@ -72,6 +74,8 @@ public class GMapExampleActivity extends MapActivity {
 		menu.add(VIEW_GROUP_ID, ADD_STAR_POINT_ID, 7, R.string.add_star_point);
 		menu.add(VIEW_GROUP_ID, CLEAR_POINT_ID, 8, R.string.clear_point);
 		menu.add(VIEW_GROUP_ID, FLIP_SATELITE_ID, 9, R.string.flip_satellite);
+		menu.add(VIEW_GROUP_ID, FLIP_STREET_ID, 10, R.string.flip_street);
+		menu.add(VIEW_GROUP_ID, FLIP_TRAFFIC_ID, 11, R.string.flip_traffic);
 		return true;
 	}
 
@@ -108,6 +112,12 @@ public class GMapExampleActivity extends MapActivity {
 			break;
 		case FLIP_SATELITE_ID:
 			flipSatellite();
+			break;
+		case FLIP_STREET_ID:
+			flipStreet();
+			break;
+		case FLIP_TRAFFIC_ID:
+			flipTraffic();
 			break;
 		}
 		return true;
@@ -189,6 +199,18 @@ public class GMapExampleActivity extends MapActivity {
 		boolean nowSatellite = mapView.isSatellite();
 		mapView.setSatellite(!nowSatellite);
 	}
+
+	private void flipTraffic() {
+		boolean isTraffic = mapView.isTraffic();
+		mapView.setTraffic(!isTraffic);
+		
+	}
+
+	private void flipStreet() {
+		boolean isStreet = mapView.isStreetView();
+		mapView.setStreetView(!isStreet);
+	}
+
 	@Override
 	protected boolean isRouteDisplayed() {
 		return true;
