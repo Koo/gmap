@@ -210,6 +210,6 @@ public class GMapExampleActivity extends MapActivity {
 
 	@Override
 	protected boolean isRouteDisplayed() {
-		return true;
+		return false;
 	}
 }
